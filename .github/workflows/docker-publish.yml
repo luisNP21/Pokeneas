@@ -25,4 +25,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: maocampog1/pokeneas:latest
+          tags: luisnp10/pokeneas:latest
