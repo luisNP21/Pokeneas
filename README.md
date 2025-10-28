@@ -1,20 +1,46 @@
 
-
 # 🐲 Pokeneas - Flask + Docker + AWS S3 + Docker Swarm
 
-Proyecto educativo basado en los **Pokeneas** (Pokémon paisas). Muestra información de Pokeneas, sus imágenes desde AWS S3 y permite desplegar el sistema en un clúster con Docker Swarm.
+
+Integrantes:
+- Luis Angel Nerio
+- Camilo Salazar 
+- María Alejandra Ocampo 
+
+Taller 2 de Arquitectura de Software 
+- **Pokeneas** (Pokémon paisas).
+Este taller muestra información de Pokeneas, sus imágenes desde AWS S3 y permite ejecutarlo tanto **localmente** como en un **clúster Docker Swarm** desplegado en AWS.
 
 ---
 
-## 🚀 Ejecución local
+## 🌍 Acceso público
+
+El proyecto está desplegado en las siguientes direcciones IP (puedes usar cualquiera):
+
+```
+http://44.222.253.65:8000
+http://54.164.60.154:8000
+http://18.207.127.103:8000
+http://54.235.231.206:8000
+```
+
+Cada dirección corresponde a un nodo del clúster.
+Al **recargar la página**, se puede observar que la respuesta proviene de diferentes contenedores, confirmando que el servicio se **actualiza y balancea automáticamente** dentro del Swarm.
+
+---
+
+## 💻 Ejecución local
+
+También puedes correr el proyecto localmente para pruebas o desarrollo.
 
 ### 1️⃣ Crear entorno virtual
+
 **Windows:**
-```
-powershell
+
+```powershell
 python -m venv .venv
 .venv\Scripts\activate
-````
+```
 
 **Linux/Mac:**
 
@@ -35,7 +61,7 @@ pip install -r requirements.txt
 python app.py
 ```
 
-Abre [http://localhost:8000](http://localhost:8000)
+Luego abre [http://localhost:8000](http://localhost:8000)
 
 ---
 
@@ -82,11 +108,7 @@ docker swarm init --advertise-addr $(hostname -I | awk '{print $1}')
 docker swarm join-token manager
 ```
 
-Copia el token que se muestra.
-
 ### 🔹 Paso 4: Unir los 3 managers
-
-En cada uno:
 
 ```bash
 sudo docker swarm join --token <TOKEN_DEL_LIDER> <IP_PRIVADA_DEL_LIDER>:2377
@@ -123,19 +145,3 @@ docker service ps pokeneas
 
 ---
 
-## 🌍 Acceso
-
-En el navegador:
-`http://<IP_PUBLICA_DE_CUALQUIER_INSTANCIA>:8000/`
-
-Rutas:
-
-* `/` → Pokenea aleatorio (JSON bonito)
-* `/pokenea-random` → Imagen + frase inspiracional
-* `/pokeneas` → Lista de todos los Pokeneas
-
-
----  
-
-¿Quieres que te lo deje con emojis de color y formato tipo “README profesional de GitHub” (con badges, centrado y color)? Puedo darte esa versión también si es para entregar o subir a DockerHub.
-```
