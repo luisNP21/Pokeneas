@@ -13,7 +13,7 @@ Este taller muestra información de Pokeneas, sus imágenes desde AWS S3 y permi
 
 ---
 
-## 🌍 Acceso público
+##  Acceso público
 
 El proyecto está desplegado en las siguientes direcciones IP (puedes usar cualquiera):
 
@@ -29,11 +29,11 @@ Al **recargar la página**, se puede observar que la respuesta proviene de difer
 
 ---
 
-## 💻 Ejecución local
+##  Ejecución local
 
 También puedes correr el proyecto localmente para pruebas o desarrollo.
 
-### 1️⃣ Crear entorno virtual
+### 1️ Crear entorno virtual
 
 **Windows:**
 
@@ -49,13 +49,13 @@ python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-### 2️⃣ Instalar dependencias
+### 2️ Instalar dependencias
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3️⃣ Ejecutar la app
+### 3️ Ejecutar la app
 
 ```bash
 python app.py
@@ -65,15 +65,15 @@ Luego abre [http://localhost:8000](http://localhost:8000)
 
 ---
 
-## 🐳 Ejecutar con Docker
+##  Ejecutar con Docker
 
-### 1️⃣ Construir imagen
+### 1️ Construir imagen
 
 ```bash
 docker build -t pokeneas .
 ```
 
-### 2️⃣ Correr contenedor
+### 2️ Correr contenedor
 
 ```bash
 docker run -d -p 8000:8000 pokeneas
@@ -81,15 +81,15 @@ docker run -d -p 8000:8000 pokeneas
 
 ---
 
-## ☁️ Despliegue con Docker Swarm (AWS)
+##  Despliegue con Docker Swarm (AWS)
 
-### 🔹 Paso 1: Crear 4 instancias EC2
+###  Paso 1: Crear 4 instancias EC2
 
 * Una será **líder** (`swarm-leader`)
 * Tres serán **managers** (`swarm-mgr-1`, `swarm-mgr-2`, `swarm-mgr-3`)
 * Abre puertos TCP: `22, 8000, 2377, 7946` y UDP: `7946, 4789`
 
-### 🔹 Paso 2: Instalar Docker en todas
+###  Paso 2: Instalar Docker en todas
 
 ```bash
 sudo dnf -y update
@@ -101,20 +101,20 @@ exit
 
 (Vuelve a entrar con *Connect* desde AWS)
 
-### 🔹 Paso 3: Iniciar Swarm en el líder
+###  Paso 3: Iniciar Swarm en el líder
 
 ```bash
 docker swarm init --advertise-addr $(hostname -I | awk '{print $1}')
 docker swarm join-token manager
 ```
 
-### 🔹 Paso 4: Unir los 3 managers
+###  Paso 4: Unir los 3 managers
 
 ```bash
 sudo docker swarm join --token <TOKEN_DEL_LIDER> <IP_PRIVADA_DEL_LIDER>:2377
 ```
 
-### 🔹 Paso 5: Verificar desde el líder
+###  Paso 5: Verificar desde el líder
 
 ```bash
 docker node ls
@@ -122,7 +122,7 @@ docker node ls
 
 ---
 
-## 🧩 Desplegar el servicio
+##  Desplegar el servicio
 
 En el **líder**:
 
